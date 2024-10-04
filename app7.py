@@ -2,7 +2,9 @@ import streamlit as st
 import openai
 import pandas as pd
 
-openai.api_key ="your_key" 
+load_dotenv()
+
+openai.api_key = os.getenv("keyfile")
 
 excel_url = "https://raw.githubusercontent.com/jaeheehui/korean/main/study_data.xlsx"
 excel_data = excel_data = pd.read_excel("study_data.xlsx")
