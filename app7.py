@@ -1,17 +1,9 @@
 import streamlit as st
 import openai
 import pandas as pd
-import os
-from dotenv import load_dotenv
 
-load_dotenv(r"C:\Users\k5151\Desktop\klaces\keyfile.env")
-
-# 환경 변수에서 API 키 가져오기
-api_key = os.getenv("OPENAI_API_KEY")
-if api_key is None:
-    st.error("API 키를 불러올 수 없습니다. .env 파일을 확인하세요.")
-else:
-    openai.api_key = api_key
+# Streamlit Secrets에서 API 키 불러오기
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 # GitHub에서 Excel 파일을 불러올 수 있는 URL
 excel_url = "https://raw.githubusercontent.com/jaeheehui/korean/main/study_data.xlsx"
@@ -19,7 +11,6 @@ excel_data = pd.read_excel(excel_url)
 
 st.title("GPT 기반 한국어 쓰기 과제 도구")
 
-# 사용자 입력
 user_input = st.text_area("쓰기 과제를 입력하세요:")
 
 if st.button("검사 받기"):
