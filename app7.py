@@ -6,8 +6,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# API 키가 잘 로드되었는지 확인
-api_key = os.getenv("keyfile")
+# 환경 변수에서 API 키 가져오기
+api_key = os.getenv("OPENAI_API_KEY")
 if api_key is None:
     st.error("API 키를 불러올 수 없습니다. .env 파일을 확인하세요.")
 else:
@@ -19,6 +19,7 @@ excel_data = pd.read_excel(excel_url)
 
 st.title("GPT 기반 한국어 쓰기 과제 도구")
 
+# 사용자 입력
 user_input = st.text_area("쓰기 과제를 입력하세요:")
 
 if st.button("검사 받기"):
