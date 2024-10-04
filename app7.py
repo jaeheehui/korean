@@ -6,8 +6,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-openai.api_key = os.getenv("keyfile")
+# API 키가 잘 로드되었는지 확인
+api_key = os.getenv("keyfile")
+if api_key is None:
+    st.error("API 키를 불러올 수 없습니다. .env 파일을 확인하세요.")
+else:
+    openai.api_key = api_key
 
+# GitHub에서 Excel 파일을 불러올 수 있는 URL
 excel_url = "https://raw.githubusercontent.com/jaeheehui/korean/main/study_data.xlsx"
 excel_data = pd.read_excel(excel_url)
 
@@ -34,7 +40,7 @@ if st.button("검사 받기"):
         )
 
         # 최신 방식의 GPT API 호출
-        response = openai.completions.create(
+        response = openai.ChatCompletion.create(
             model="ft:gpt-3.5-turbo-0125:personal:lev3grammar:AEVA4SJm",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
