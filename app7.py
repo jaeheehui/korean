@@ -33,7 +33,7 @@ if st.button("검사 받기"):
 
         # 최신 방식의 GPT API 호출
         response = openai.ChatCompletion.create(
-            model="ft:gpt-3.5-turbo-0125:personal:lev3grammar:AEVA4SJm",
+            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt}
