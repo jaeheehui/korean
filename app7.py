@@ -33,8 +33,8 @@ if st.button("검사 받기"):
             f"문법적 오류만 고쳐서 모범 답안을 작성해라. 엑셀에서 사용한 어휘와 문법 부분은 빨간색으로 표시해라."
         )
 
-        # GPT API 호출 (최신 방식)
-        response = openai.chat_completions.create(
+        # GPT API 호출 (올바른 방식)
+        response = openai.ChatCompletion.create(
             model="ft:gpt-3.5-turbo-0125:personal:lev3grammar:AEVA4SJm",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
