@@ -4,7 +4,7 @@ import pandas as pd
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(r"C:\Users\k5151\Desktop\klaces\keyfile.env")
 
 # 환경 변수에서 API 키 가져오기
 api_key = os.getenv("OPENAI_API_KEY")
