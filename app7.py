@@ -1,13 +1,15 @@
 import streamlit as st
 import openai
 import pandas as pd
+import os
+from dotenv import load_dotenv
 
 load_dotenv()
 
 openai.api_key = os.getenv("keyfile")
 
 excel_url = "https://raw.githubusercontent.com/jaeheehui/korean/main/study_data.xlsx"
-excel_data = excel_data = pd.read_excel("study_data.xlsx")
+excel_data = pd.read_excel(excel_url)
 
 st.title("GPT 기반 한국어 쓰기 과제 도구")
 
@@ -15,8 +17,8 @@ user_input = st.text_area("쓰기 과제를 입력하세요:")
 
 if st.button("검사 받기"):
     if user_input:
-        vocab_data = excel_data['어휘'].dropna().tolist()  # Vocabulary 열에서 어휘 불러오기
-        grammar_data = excel_data['문법'].dropna().tolist()  # Grammar 열에서 문법 불러오기
+        vocab_data = excel_data['어휘'].dropna().tolist()
+        grammar_data = excel_data['문법'].dropna().tolist()
 
         prompt = (
             f"너는 한국어 교사 역할을 맡고 있다. 학습자가 작성한 글에서 오직 문법적 오류만 수정하라. "
@@ -46,7 +48,6 @@ if st.button("검사 받기"):
 
         feedback = response['choices'][0]['message']['content'].strip()
 
-        
         styled_feedback = feedback.replace("<span style='color:red'>", "<mark style='background-color:red; color:white'>").replace("</span>", "</mark>")
         st.markdown(styled_feedback, unsafe_allow_html=True)
     else:
